@@ -31,8 +31,12 @@ alias la='ll -a'
 alias lsd="ll | grep --color=never '^d'"
 
 # Build aliases
+alias gcb='gradle clean build'
+alias gocb='gradle --offline clean build'
+
 alias mci='mvn clean install'
 alias moci='mvn --offline clean install'
+
 
 # Kept for now, but really, use ag instead
 alias grep='grep --color=auto'
