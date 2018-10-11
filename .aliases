@@ -37,6 +37,9 @@ alias gocb='gradle --offline clean build'
 alias mci='mvn clean install'
 alias moci='mvn --offline clean install'
 
+# kubectl aliases
+alias kswitch='kubectl config use-context'
+
 
 # Kept for now, but really, use ag instead
 alias grep='grep --color=auto'
