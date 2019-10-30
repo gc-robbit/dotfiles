@@ -6,16 +6,14 @@
 brew update
 brew upgrade
 
-# Install casks I use
+# Casks
 brew tap homebrew/cask-versions
 
-# Install GNU `sed`, overwriting the built-in `sed`.
-# brew install gnu-sed --with-default-names
-
-# Install new Bash
+# Packages
+# Install newer Bash
 brew install bash
 
-# Switch to using brew-installed bash as default shell
+# Switch to brew-installed bash as default shell
 if ! fgrep -q '/usr/local/bin/bash' /etc/shells
 then
   echo '/usr/local/bin/bash' | sudo tee -a /etc/shells
@@ -23,17 +21,21 @@ then
 fi
 
 # Install other useful binaries.
-brew install wget
-brew install the_silver_searcher
+brew install ansible
+brew install bash-completion
 brew install docker
 brew install git
+brew install python
 brew install ssh-copy-id
+brew install the_silver_searcher
 brew install tree
+brew install wget
 
 # k8s
 brew install kubernetes-cli
 brew install kubernetes-helm
 
+# Cask packages
 brew cask install sublime-text2
 brew cask install intellij-idea
 brew cask install iterm2
