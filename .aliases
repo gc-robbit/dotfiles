@@ -12,9 +12,6 @@ alias -- -="cd -"
 alias d="cd ~/dev"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias g="git"
-alias h="history"
-alias j="jobs"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -37,13 +34,26 @@ alias gocb='gradle --offline clean build'
 alias mci='mvn clean install'
 alias moci='mvn --offline clean install'
 
-# kubectl aliases
+# kubectl aliases & functions
 alias kswitch='kubectl config use-context'
 
+function klogwait() {
+  local namespace=$1
+  local pod=$2
+  kubectl -n ${namespace} wait --for=condition=Ready pod/${pod} --timeout=30m; kubectl -n ${namespace} logs -f ${pod}
+}
 
-# Kept for now, but really, use ag instead
-alias grep='grep --color=auto'
-alias egrep='grep -E'
+function kwatchpods() {
+  local namespace=$1
+  local time=$2
+  watch -n ${time} kubectl -n ${namespace} get pods
+}
+
+function kwatchtop() {
+  local namespace=$1
+  local time=$2
+  watch -n ${time} kubectl -n ${namespace} top pods
+}
 
 # Get week number
 alias week='date +%V'
@@ -75,9 +85,6 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 # macOS has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
-# Trim new lines and copy to clipboard
-alias c="tr -d '\n' | pbcopy"
-
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
@@ -99,6 +106,3 @@ alias map="xargs -n1"
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
     alias "$method"="lwp-request -m '$method'"
 done
-
-# Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
