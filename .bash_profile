@@ -10,6 +10,11 @@ do
 done
 unset file
 
+if which rbenv &> /dev/null
+then
+    eval "$(rbenv init -)"
+fi
+
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
